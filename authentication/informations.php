@@ -1,5 +1,6 @@
 <?php
 require_once('functions.php');
+session_start();
 $user = null;
 if(isset($_GET['id'])) {
     $users = getUser($_GET['id']);
