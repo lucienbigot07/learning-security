@@ -1,12 +1,15 @@
 <?php
-require_once('functions.php');
 session_start();
+require_once('functions.php');
 $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
+
+
+
 if (isset($_GET['email']) && isset($_GET['password'])) {
-    $users = logUser($_GET['email'], $_GET['password']);
+    $users = logUser($_GET['email']);
     if(!empty($users)) {
-        $user = $users[0];
-        $_SESSION['user'] = $user;
+            $user = $users[0];
+            $_SESSION['user'] = $user;
     }
 }
 ?>

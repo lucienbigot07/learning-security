@@ -1,8 +1,12 @@
 <?php
 require_once('functions.php');
 
-if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password'])) {
-    $result = saveUser($_POST['username'], $_POST['email'], $_POST['password']);
+if (isset(htmlspecialchars($_POST['username'])) && isset (htmlspecialchars($_POST['email']) && isset( htmlspecialchars ($_POST['password']))) {
+
+
+   
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    $result = saveUser($_POST['username'], $_POST['email'], $hashed_password );
     if($result === true) {
         header('Location: index.php');
     } else {
@@ -23,7 +27,7 @@ if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['passwor
 <body>
 <div class="container">
     <h1>Inscription</h1>
-    <form action="/appli%20sécu/learning-security/register.php" method="post" class="needs-validation" novalidate>
+    <form action="/appli%20sécu/learning-security/authentication/register.php" method="post" class="needs-validation" novalidate>
         <div class="form-group">
             <label for="username">Nom d'utilisateur :</label>
             <input type="text" class="form-control" id="username" name="username" required>

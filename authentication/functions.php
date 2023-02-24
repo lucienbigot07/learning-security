@@ -16,7 +16,7 @@ function connectDb()
 function logUser($email, $password)
 {
     $connexion = connectDb();
-    $sql = 'SELECT * FROM users WHERE email = "' . $email . '" AND password = "' .$password . '"';
+    $sql = 'SELECT * FROM users WHERE email = "' . $email . '"';
     $stmt = $connexion->prepare($sql);
     $stmt->execute();
 
@@ -28,8 +28,13 @@ function getUser($id) {
     $sql = 'SELECT * FROM users WHERE id = ' . $id;
     $stmt = $connexion->prepare($sql);
     $stmt->execute();
+    $users = logUser($_GET['email']);
 
-    return $stmt->fetchAll(PDO::FETCH_OBJ);
+    //non fonctionnel
+    if(password_verify($password, $users -> $password)) {
+        return $users
+    }
+    
 }
 
 function saveUser($email, $username, $password) {
